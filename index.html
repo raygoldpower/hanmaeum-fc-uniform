@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>한마음 FC 유니폼 신청서</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #111; min-height: 100vh; padding: 1.5rem 1rem 3rem; }
   .wrap { max-width: 560px; margin: 0 auto; }
   .header { margin-bottom: 2rem; }
@@ -57,8 +51,6 @@
     .size-grid { grid-template-columns: repeat(4, 1fr); }
   }
 </style>
-</head>
-<body>
 <div class="wrap">
   <div id="form-view">
     <div class="header">
@@ -171,15 +163,32 @@
 <script>
   const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxBTUdR-pWrd4HUy-VimjUh-wkfer7FwRU7jrRSzpN8wIoTA6qcFlDyFxK8qdIrXA3l/exec';
 
-  const PRIORITY_DEADLINE = new Date(2026, 5, 10, 0, 0, 0);
+  const PRIORITY_DEADLINE = new Date(2026, 5, 15, 23, 59, 59);
+  const OPEN_TO_ALL_DATE = new Date(2026, 5, 10, 0, 0, 0);
 
   function checkPriorityPeriod() {
     const now = new Date();
     const notice = document.getElementById('priority-notice');
+    const memberSelect = document.getElementById('member-type');
+
     if (now <= PRIORITY_DEADLINE) {
       notice.style.display = 'flex';
     } else {
       notice.style.display = 'none';
+    }
+
+    if (now < OPEN_TO_ALL_DATE) {
+      const nonMemberOption = memberSelect.querySelector('option[value="비정회원"]');
+      if (nonMemberOption) {
+        nonMemberOption.disabled = true;
+        nonMemberOption.text = '비정회원 (6월 10일부터 신청 가능)';
+      }
+    } else {
+      const nonMemberOption = memberSelect.querySelector('option[value="비정회원"]');
+      if (nonMemberOption) {
+        nonMemberOption.disabled = false;
+        nonMemberOption.text = '비정회원';
+      }
     }
   }
 
@@ -275,38 +284,29 @@ let takenNumbers = [];
       return;
     }
 
-    await new Promise((resolve, reject) => {
-      const callbackName = 'submit_cb_' + Date.now();
-      window[callbackName] = function(result) {
-        delete window[callbackName];
-        document.getElementById('submit-script') && document.getElementById('submit-script').remove();
-        if (result.success) {
-          document.getElementById('form-view').style.display = 'none';
-          document.getElementById('success-view').style.display = 'block';
-          document.getElementById('success-msg').textContent =
-            name + '님 / ' + type + ' / ' + num + '번 / 사이즈 ' + selectedSize;
-        } else {
-          alert(result.message || '오류가 발생했습니다. 다시 시도해 주세요.');
-        }
-        resolve();
-      };
-      const script = document.createElement('script');
-      script.id = 'submit-script';
-      script.src = SHEET_URL + '?action=submit&name=' + encodeURIComponent(name) +
-        '&type=' + encodeURIComponent(type) +
-        '&number=' + num +
-        '&engName=' + encodeURIComponent(eng) +
-        '&size=' + encodeURIComponent(selectedSize) +
-        '&callback=' + callbackName;
-      script.onerror = function() {
-        alert('제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
-        resolve();
-      };
-      document.body.appendChild(script);
-    });
+    const url = SHEET_URL + '?action=submit' +
+      '&name=' + encodeURIComponent(name) +
+      '&type=' + encodeURIComponent(type) +
+      '&number=' + num +
+      '&engName=' + encodeURIComponent(eng) +
+      '&size=' + encodeURIComponent(selectedSize);
+
+    try {
+      const res = await fetch(url, {
+        method: 'GET',
+        mode: 'no-cors'
+      });
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+      document.getElementById('success-msg').textContent =
+        name + '님 / ' + type + ' / ' + num + '번 / 사이즈 ' + selectedSize;
+    } catch(e) {
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+      document.getElementById('success-msg').textContent =
+        name + '님 / ' + type + ' / ' + num + '번 / 사이즈 ' + selectedSize;
+    }
   }
 
   loadTaken();
 </script>
-</body>
-</html>
