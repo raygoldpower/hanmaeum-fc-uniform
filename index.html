@@ -67,7 +67,7 @@
       <p class="sub">정보를 입력해 주시면 순서대로 처리됩니다.</p>
     </div>
 
-    <div class="notice">
+    <div class="notice" id="priority-notice" style="display:none;">
       ⚠️ <span>정회원 우선 신청 기간입니다. 등번호 중복 시 먼저 제출하신 분이 우선입니다.</span>
     </div>
 
@@ -138,7 +138,7 @@
           📏 <span id="toggle-label">사이즈 가이드 보기</span>
         </button>
         <div id="size-table-wrap" style="display:none; margin-top:12px;">
-          <p class="size-note">본 유니폼은 한국 표준보다 반 사이즈 여유 있게 제작된 유럽형 사이즈입니다.</p>
+          <p class="size-note">한국 표준 사이즈를 참고 후 유럽 사이즈로 선택해 주세요.</p>
           <table class="size-table">
             <thead>
               <tr><th>유럽 표기</th><th>한국 표준</th><th>가슴(cm)</th><th>길이(cm)</th><th>신장(cm)</th><th>체중(kg)</th></tr>
@@ -170,6 +170,20 @@
 
 <script>
   const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxBTUdR-pWrd4HUy-VimjUh-wkfer7FwRU7jrRSzpN8wIoTA6qcFlDyFxK8qdIrXA3l/exec';
+
+  const PRIORITY_DEADLINE = new Date(2026, 5, 15, 23, 59, 59);
+
+  function checkPriorityPeriod() {
+    const now = new Date();
+    const notice = document.getElementById('priority-notice');
+    if (now <= PRIORITY_DEADLINE) {
+      notice.style.display = 'flex';
+    } else {
+      notice.style.display = 'none';
+    }
+  }
+
+  checkPriorityPeriod();
   let selectedSize = null;
   let takenNumbers = [];
   let tableOpen = false;
