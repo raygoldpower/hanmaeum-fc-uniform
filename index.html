@@ -275,30 +275,35 @@ let takenNumbers = [];
       return;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('type', type);
-      formData.append('number', num);
-      formData.append('engName', eng);
-      formData.append('size', selectedSize);
-
-      const res = await fetch(SHEET_URL, {
-        method: 'POST',
-        body: formData
-      });
-      const result = await res.json();
-      if (result.success) {
-        document.getElementById('form-view').style.display = 'none';
-        document.getElementById('success-view').style.display = 'block';
-        document.getElementById('success-msg').textContent =
-          name + '님 / ' + type + ' / ' + num + '번 / 사이즈 ' + selectedSize;
-      } else {
-        alert('오류가 발생했습니다. 다시 시도해 주세요.');
-      }
-    } catch(e) {
-      alert('제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
-    }
+    await new Promise((resolve, reject) => {
+      const callbackName = 'submit_cb_' + Date.now();
+      window[callbackName] = function(result) {
+        delete window[callbackName];
+        document.getElementById('submit-script') && document.getElementById('submit-script').remove();
+        if (result.success) {
+          document.getElementById('form-view').style.display = 'none';
+          document.getElementById('success-view').style.display = 'block';
+          document.getElementById('success-msg').textContent =
+            name + '님 / ' + type + ' / ' + num + '번 / 사이즈 ' + selectedSize;
+        } else {
+          alert(result.message || '오류가 발생했습니다. 다시 시도해 주세요.');
+        }
+        resolve();
+      };
+      const script = document.createElement('script');
+      script.id = 'submit-script';
+      script.src = SHEET_URL + '?action=submit&name=' + encodeURIComponent(name) +
+        '&type=' + encodeURIComponent(type) +
+        '&number=' + num +
+        '&engName=' + encodeURIComponent(eng) +
+        '&size=' + encodeURIComponent(selectedSize) +
+        '&callback=' + callbackName;
+      script.onerror = function() {
+        alert('제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        resolve();
+      };
+      document.body.appendChild(script);
+    });
   }
 
   loadTaken();
