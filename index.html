@@ -169,7 +169,7 @@
 </div>
 
 <script>
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxBTUdR-pWrd4HUy-VimjUh-wkfer7FwRU7jrRSzpN8wIoTA6qcFlDyFxK8qdIrXA3l/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz05RP_zyRPmDWjbQCQ8JW6rmVbIuXlwd5Da8fvlhbFF2JOTJgRB6jedl11ssOdX6c/exec';
 
   const PRIORITY_DEADLINE = new Date(2026, 5, 15, 23, 59, 59);
 
@@ -185,16 +185,25 @@
 
   checkPriorityPeriod();
   let selectedSize = null;
-  let takenNumbers = [];
+let takenNumbers = [];
   let tableOpen = false;
 
-  async function loadTaken() {
-    try {
-      const res = await fetch(SHEET_URL + '?action=getTaken');
-      const data = await res.json();
-      takenNumbers = data.taken || [];
-      renderTaken();
-    } catch(e) { takenNumbers = []; }
+  function loadTaken() {
+    return new Promise((resolve) => {
+      const callbackName = 'cb_' + Date.now();
+      window[callbackName] = function(data) {
+        takenNumbers = data.taken || [];
+        renderTaken();
+        delete window[callbackName];
+        document.getElementById('jsonp-script') && document.getElementById('jsonp-script').remove();
+        resolve();
+      };
+      const script = document.createElement('script');
+      script.id = 'jsonp-script';
+      script.src = SHEET_URL + '?action=getTaken&callback=' + callbackName;
+      script.onerror = function() { resolve(); };
+      document.body.appendChild(script);
+    });
   }
 
   function renderTaken() {
@@ -267,10 +276,16 @@
     }
 
     try {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('type', type);
+      formData.append('number', num);
+      formData.append('engName', eng);
+      formData.append('size', selectedSize);
+
       const res = await fetch(SHEET_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, type, number: num, engName: eng, size: selectedSize })
+        body: formData
       });
       const result = await res.json();
       if (result.success) {
