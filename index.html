@@ -6,149 +6,208 @@
 <title>한마음 FC 유니폼 신청서</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0d0d; color: #e5e5e5; min-height: 100vh; padding: 1.5rem 1rem 3rem; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0a1a0f;
+    color: #e8f5e9;
+    min-height: 100vh;
+    padding: 1.5rem 1rem 3rem;
+  }
+
   .wrap { max-width: 560px; margin: 0 auto; }
   .header { margin-bottom: 2rem; }
-  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 4px 12px; border-radius: 999px; background: #1a1a1a; border: 0.5px solid #2e2e2e; color: #888; margin-bottom: 0.75rem; }
-  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #3b82f6; display: inline-block; }
-  h1 { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 0.25rem; }
-  .sub { font-size: 14px; color: #666; }
-  .card { background: #111; border: 0.5px solid #222; border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; padding: 4px 12px; border-radius: 999px;
+    background: #0d2b14; border: 1px solid #1a5c28; color: #4caf50;
+    margin-bottom: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+  }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #4caf50; display: inline-block; }
+
+  h1 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 0.25rem; }
+  .sub { font-size: 14px; color: #4a7a50; }
+
+  .card {
+    background: #0d1f10;
+    border: 1px solid #1c3d22;
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
   .field { margin-bottom: 1.25rem; }
   .field:last-child { margin-bottom: 0; }
-  label { display: block; font-size: 13px; font-weight: 500; color: #999; margin-bottom: 6px; }
-  .required { color: #3b82f6; margin-left: 2px; }
+
+  label { display: block; font-size: 13px; font-weight: 600; color: #6dbf74; margin-bottom: 6px; }
+  .required { color: #a5d6a7; margin-left: 2px; }
+
   input[type="text"], input[type="password"], input[type="date"], select {
-    width: 100%; padding: 10px 12px; border: 0.5px solid #2a2a2a;
-    border-radius: 8px; font-size: 15px; outline: none; transition: border 0.15s;
-    background: #1a1a1a; color: #e5e5e5;
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid #1c3d22;
+    border-radius: 10px; font-size: 15px; outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    background: #071209; color: #e8f5e9;
   }
-  input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, select:focus { border-color: #3b82f6; }
-  input[type="text"]::placeholder, input[type="password"]::placeholder { color: #444; }
-  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); }
-  select option { background: #1a1a1a; color: #e5e5e5; }
+  input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, select:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
+  }
+  input[type="text"]::placeholder, input[type="password"]::placeholder { color: #2d5c33; }
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6) sepia(1) saturate(3) hue-rotate(80deg); }
+  select option { background: #0d1f10; color: #e8f5e9; }
+
   input[type="number"] {
-    width: 80px; text-align: center; font-size: 18px; font-weight: 600;
-    padding: 8px; border: 0.5px solid #2a2a2a; border-radius: 8px;
-    outline: none; background: #1a1a1a; color: #fff;
+    width: 80px; text-align: center; font-size: 20px; font-weight: 700;
+    padding: 8px; border: 1.5px solid #1c3d22; border-radius: 10px;
+    outline: none; background: #071209; color: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
-  input[type="number"]:focus { border-color: #3b82f6; }
-  .hint { font-size: 12px; color: #555; margin-top: 4px; }
+  input[type="number"]:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
+  }
+
+  .hint { font-size: 12px; color: #2d6e35; margin-top: 4px; }
+
   .size-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
   .size-btn {
-    border: 0.5px solid #2a2a2a; border-radius: 8px; padding: 10px 2px;
-    font-size: 13px; font-weight: 500; text-align: center; cursor: pointer;
-    background: #1a1a1a; color: #888; transition: all 0.15s; user-select: none;
+    border: 1.5px solid #1c3d22; border-radius: 10px; padding: 10px 2px;
+    font-size: 13px; font-weight: 600; text-align: center; cursor: pointer;
+    background: #071209; color: #4a7a50; transition: all 0.15s; user-select: none;
   }
-  .size-btn:hover { border-color: #3b82f6; color: #3b82f6; }
-  .size-btn.selected { background: #1d3557; color: #60a5fa; border-color: #3b82f6; }
-  .section-title { font-size: 11px; font-weight: 600; color: #444; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
-  .divider { height: 0.5px; background: #1e1e1e; margin: 1.25rem 0; }
+  .size-btn:hover { border-color: #4caf50; color: #fff; background: #0d2b14; }
+  .size-btn.selected { background: #1b5e20; color: #fff; border-color: #4caf50; box-shadow: 0 0 0 3px rgba(76,175,80,0.2); }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: #2d6e35;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem;
+  }
+  .divider { height: 1px; background: #1c3d22; margin: 1.25rem 0; }
+
   .submit-btn {
-    width: 100%; padding: 14px; border-radius: 12px; border: none;
-    background: #3b82f6; color: #fff; font-size: 16px; font-weight: 600;
-    cursor: pointer; transition: background 0.15s; margin-top: 0.5rem; letter-spacing: 0.02em;
+    width: 100%; padding: 15px; border-radius: 12px; border: none;
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+    color: #fff; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: opacity 0.15s; margin-top: 0.5rem;
+    letter-spacing: 0.03em; box-shadow: 0 4px 20px rgba(76,175,80,0.3);
   }
-  .submit-btn:hover { background: #2563eb; }
+  .submit-btn:hover { opacity: 0.9; }
+
   .tag {
-    display: inline-block; font-size: 12px; padding: 4px 10px;
-    border-radius: 999px; border: 0.5px solid #2a2a2a; color: #666;
+    display: inline-block; font-size: 12px; padding: 4px 11px;
+    border-radius: 999px; border: 1px solid #1c3d22; color: #4a7a50;
     margin-right: 4px; margin-bottom: 4px; cursor: pointer;
-    background: #1a1a1a; transition: all 0.1s;
+    background: #071209; transition: all 0.12s; font-weight: 500;
   }
-  .tag:hover { border-color: #3b82f6; color: #3b82f6; }
+  .tag:hover { border-color: #4caf50; color: #a5d6a7; background: #0d2b14; }
+
   .notice {
-    background: #1a1200; border: 0.5px solid #4a3200; border-radius: 10px;
-    padding: 10px 14px; font-size: 13px; color: #f59e0b;
+    background: #1a2e00; border: 1px solid #33691e; border-radius: 10px;
+    padding: 10px 14px; font-size: 13px; color: #aed581;
     margin-bottom: 1rem; display: flex; gap: 8px; align-items: flex-start;
   }
+
   .success { display: none; text-align: center; padding: 4rem 1rem; }
   .success-icon { font-size: 56px; margin-bottom: 1rem; }
-  .success h2 { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
-  .success p { color: #666; font-size: 14px; }
+  .success h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .success p { color: #4a7a50; font-size: 14px; }
+
   .num-btn {
-    width: 38px; height: 38px; border: 0.5px solid #2a2a2a; border-radius: 8px;
-    background: #1a1a1a; color: #e5e5e5; cursor: pointer;
+    width: 40px; height: 40px; border: 1.5px solid #1c3d22; border-radius: 10px;
+    background: #071209; color: #6dbf74; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 18px; transition: all 0.1s;
+    flex-shrink: 0; font-size: 20px; font-weight: 700; transition: all 0.12s;
   }
-  .num-btn:hover { border-color: #3b82f6; color: #3b82f6; }
+  .num-btn:hover { border-color: #4caf50; background: #0d2b14; color: #fff; }
+
   .number-input-wrap { display: flex; align-items: center; gap: 8px; }
   .num-status { margin-top: 8px; font-size: 13px; display: flex; align-items: center; gap: 6px; min-height: 20px; }
-  .status-ok { color: #34d399; }
-  .status-fail { color: #f87171; }
+  .status-ok { color: #69f0ae; font-weight: 600; }
+  .status-fail { color: #ff5252; font-weight: 600; }
+
   .taken-list { margin-top: 6px; }
   .taken-list span {
-    display: inline-block; font-size: 11px; padding: 2px 7px;
-    border-radius: 4px; background: #1f1010; color: #f87171;
-    border: 0.5px solid #3d1a1a; margin: 2px;
+    display: inline-block; font-size: 11px; padding: 2px 8px;
+    border-radius: 6px; background: #1a0a0a; color: #ff5252;
+    border: 1px solid #4a1a1a; margin: 2px; font-weight: 600;
   }
+
   .size-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
   .size-table th {
-    background: #1a1a1a; color: #555; font-weight: 600;
-    padding: 7px 6px; text-align: center; border-bottom: 0.5px solid #222; font-size: 11px;
+    background: #071209; color: #2d6e35; font-weight: 700;
+    padding: 7px 6px; text-align: center; border-bottom: 1px solid #1c3d22; font-size: 11px;
   }
   .size-table td {
     padding: 7px 6px; text-align: center;
-    border-bottom: 0.5px solid #1e1e1e; color: #aaa; font-size: 12px;
+    border-bottom: 1px solid #0d1f10; color: #6dbf74; font-size: 12px;
   }
   .size-table tr:last-child td { border-bottom: none; }
-  .size-table td.hl { font-weight: 600; color: #60a5fa; }
+  .size-table td.hl { font-weight: 700; color: #a5d6a7; }
+
   .size-note {
-    font-size: 11px; color: #555; margin-bottom: 8px;
-    padding: 6px 8px; background: #1a1a1a; border-radius: 6px; line-height: 1.5;
+    font-size: 11px; color: #2d6e35; margin-bottom: 8px;
+    padding: 6px 10px; background: #071209; border-radius: 8px;
+    line-height: 1.6; border: 1px solid #1c3d22;
   }
+
   .toggle-btn {
-    font-size: 12px; color: #555; cursor: pointer;
+    font-size: 12px; color: #2d6e35; cursor: pointer;
     display: flex; align-items: center; gap: 4px;
     margin-top: 10px; background: none; border: none;
-    padding: 0; font-family: inherit; transition: color 0.1s;
+    padding: 0; font-family: inherit; transition: color 0.1s; font-weight: 600;
   }
-  .toggle-btn:hover { color: #3b82f6; }
+  .toggle-btn:hover { color: #4caf50; }
 
-  /* 관리자 패널 */
+  /* 관리자 */
   .admin-trigger {
     position: fixed; bottom: 20px; right: 20px;
     width: 36px; height: 36px; border-radius: 50%;
-    background: #1a1a1a; border: 0.5px solid #2a2a2a;
-    color: #444; font-size: 16px; cursor: pointer;
+    background: #0d1f10; border: 1px solid #1c3d22;
+    color: #2d6e35; font-size: 16px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.15s; z-index: 100;
   }
-  .admin-trigger:hover { border-color: #3b82f6; color: #3b82f6; }
+  .admin-trigger:hover { border-color: #4caf50; color: #4caf50; }
+
   .admin-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7); z-index: 200;
+    background: rgba(0,0,0,0.8); z-index: 200;
     align-items: center; justify-content: center; padding: 1rem;
   }
   .admin-overlay.open { display: flex; }
+
   .admin-panel {
-    background: #111; border: 0.5px solid #2a2a2a; border-radius: 16px;
+    background: #0d1f10; border: 1px solid #1c3d22; border-radius: 16px;
     padding: 1.5rem; width: 100%; max-width: 400px;
   }
-  .admin-panel h2 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 1.25rem; }
+  .admin-panel h2 { font-size: 16px; font-weight: 700; color: #a5d6a7; margin-bottom: 1.25rem; }
   .admin-field { margin-bottom: 1rem; }
-  .admin-field label { font-size: 12px; color: #666; margin-bottom: 6px; display: block; }
+  .admin-field label { font-size: 12px; color: #4a7a50; margin-bottom: 6px; display: block; font-weight: 600; }
+
   .admin-row { display: flex; gap: 8px; margin-top: 1rem; }
   .admin-btn {
     flex: 1; padding: 10px; border-radius: 8px; border: none;
-    font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s;
   }
-  .admin-btn.primary { background: #3b82f6; color: #fff; }
-  .admin-btn.primary:hover { background: #2563eb; }
-  .admin-btn.cancel { background: #1a1a1a; color: #888; border: 0.5px solid #2a2a2a; }
-  .admin-btn.cancel:hover { color: #fff; }
-  .admin-msg { font-size: 13px; margin-top: 10px; text-align: center; min-height: 20px; }
-  .admin-msg.ok { color: #34d399; }
-  .admin-msg.err { color: #f87171; }
-  .admin-lock { }
+  .admin-btn.primary { background: #2e7d32; color: #fff; }
+  .admin-btn.primary:hover { background: #43a047; }
+  .admin-btn.cancel { background: #071209; color: #4a7a50; border: 1px solid #1c3d22; }
+  .admin-btn.cancel:hover { color: #a5d6a7; }
+
+  .admin-msg { font-size: 13px; margin-top: 10px; text-align: center; min-height: 20px; font-weight: 600; }
+  .admin-msg.ok { color: #69f0ae; }
+  .admin-msg.err { color: #ff5252; }
+
   .admin-settings { display: none; }
-  .date-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
   .current-settings {
-    background: #1a1a1a; border-radius: 8px; padding: 10px 12px;
-    font-size: 12px; color: #666; margin-bottom: 1rem; line-height: 1.8;
+    background: #071209; border: 1px solid #1c3d22; border-radius: 8px;
+    padding: 10px 12px; font-size: 12px; color: #2d6e35;
+    margin-bottom: 1rem; line-height: 1.8;
   }
-  .current-settings span { color: #aaa; }
+  .current-settings span { color: #a5d6a7; font-weight: 600; }
 
   @media (max-width: 400px) {
     .size-grid { grid-template-columns: repeat(4, 1fr); }
@@ -187,7 +246,7 @@
     <div class="card">
       <p class="section-title">등번호 선택</p>
       <div class="field">
-        <label>등번호 <span class="required">*</span> <span style="font-weight:400; color:#555;">(1 ~ 99)</span></label>
+        <label>등번호 <span class="required">*</span> <span style="font-weight:400; color:#2d6e35;">(1 ~ 99)</span></label>
         <div class="number-input-wrap">
           <button class="num-btn" onclick="changeNum(-1)">−</button>
           <input type="number" id="number" min="1" max="99" value="1" oninput="validateNum(this); checkNumber()" />
@@ -254,27 +313,26 @@
       </div>
     </div>
 
-    <button class="submit-btn" onclick="submitForm()">신청 완료</button>
+    <button class="submit-btn" onclick="submitForm()">⚽ 신청 완료</button>
   </div>
 
   <div class="success" id="success-view">
     <div class="success-icon">✅</div>
     <h2>신청이 완료되었습니다</h2>
     <p id="success-msg"></p>
-    <p style="margin-top:0.5rem; color:#555; font-size:13px;">운영진이 확인 후 연락드립니다.</p>
+    <p style="margin-top:0.5rem; color:#2d6e35; font-size:13px;">운영진이 확인 후 연락드립니다.</p>
   </div>
 </div>
 
-<!-- 관리자 버튼 (우하단 고정) -->
+<!-- 관리자 버튼 -->
 <button class="admin-trigger" onclick="openAdmin()" title="관리자">⚙</button>
 
-<!-- 관리자 패널 오버레이 -->
+<!-- 관리자 패널 -->
 <div class="admin-overlay" id="admin-overlay">
   <div class="admin-panel">
     <h2>⚙ 관리자 설정</h2>
 
-    <!-- 1단계: 비밀번호 -->
-    <div id="admin-lock" class="admin-lock">
+    <div id="admin-lock">
       <div class="admin-field">
         <label>비밀번호</label>
         <input type="password" id="admin-pw" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter') verifyPassword()" />
@@ -286,11 +344,8 @@
       <div class="admin-msg err" id="pw-msg"></div>
     </div>
 
-    <!-- 2단계: 날짜 설정 (비번 확인 후 표시) -->
     <div id="admin-settings" class="admin-settings">
-      <div class="current-settings" id="current-settings">
-        현재 설정 불러오는 중...
-      </div>
+      <div class="current-settings" id="current-settings">현재 설정 불러오는 중...</div>
       <div class="admin-field">
         <label>정회원 우선 신청 시작일</label>
         <input type="date" id="s-member-start" />
@@ -314,13 +369,11 @@
 
 <script>
   const SHEET_URL = 'https://hanmaeum-proxy.min85power.workers.dev';
-
   let selectedSize = null;
   let takenNumbers = [];
   let tableOpen = false;
   let currentSettings = {};
 
-  // ── 신청 기간 체크 (서버 설정 기반) ────────────────
   function applySettings(s) {
     currentSettings = s;
     const now = new Date();
@@ -328,19 +381,14 @@
     const memberStart = Number((s.memberOnlyStart || '').replace(/-/g, ''));
     const memberEnd   = Number((s.memberOnlyEnd   || '').replace(/-/g, ''));
     const openStart   = Number((s.openToAllStart  || '').replace(/-/g, ''));
-
     const notice = document.getElementById('priority-notice');
     const memberSelect = document.getElementById('member-type');
     const nonMemberOpt = memberSelect.querySelector('option[value="비정회원"]');
-
-    // 정회원 기간 안내
     if (ymd >= memberStart && ymd <= memberEnd) {
       notice.style.display = 'flex';
     } else {
       notice.style.display = 'none';
     }
-
-    // 비정회원 오픈 전이면 비활성화
     if (ymd < openStart) {
       nonMemberOpt.disabled = true;
       nonMemberOpt.text = '비정회원 (' + (s.openToAllStart || '').slice(5).replace('-', '/') + '부터 신청 가능)';
@@ -351,31 +399,27 @@
   }
 
   function loadSettings() {
-    const callbackName = 'cb_settings_' + Date.now();
-    window[callbackName] = function(data) {
-      applySettings(data);
-      delete window[callbackName];
-    };
-    const script = document.createElement('script');
-    script.src = SHEET_URL + '?action=getSettings&callback=' + callbackName;
-    script.onerror = function() {};
-    document.body.appendChild(script);
+    const cbName = 'cb_settings_' + Date.now();
+    window[cbName] = function(data) { applySettings(data); delete window[cbName]; };
+    const s = document.createElement('script');
+    s.src = SHEET_URL + '?action=getSettings&callback=' + cbName;
+    s.onerror = function() {};
+    document.body.appendChild(s);
   }
 
-  // ── 등번호 ───────────────────────────────────────────
   function loadTaken() {
     return new Promise((resolve) => {
-      const callbackName = 'cb_taken_' + Date.now();
-      window[callbackName] = function(data) {
+      const cbName = 'cb_taken_' + Date.now();
+      window[cbName] = function(data) {
         takenNumbers = data.taken || [];
         renderTaken();
-        delete window[callbackName];
+        delete window[cbName];
         resolve();
       };
-      const script = document.createElement('script');
-      script.src = SHEET_URL + '?action=getTaken&callback=' + callbackName;
-      script.onerror = function() { resolve(); };
-      document.body.appendChild(script);
+      const s = document.createElement('script');
+      s.src = SHEET_URL + '?action=getTaken&callback=' + cbName;
+      s.onerror = function() { resolve(); };
+      document.body.appendChild(s);
     });
   }
 
@@ -401,23 +445,15 @@
   function changeNum(delta) {
     const input = document.getElementById('number');
     let val = parseInt(input.value) + delta;
-    if (val < 1) val = 1;
-    if (val > 99) val = 99;
-    input.value = val;
-    checkNumber();
+    if (val < 1) val = 1; if (val > 99) val = 99;
+    input.value = val; checkNumber();
   }
-
   function validateNum(input) {
     if (input.value > 99) input.value = 99;
     if (input.value < 1) input.value = 1;
   }
+  function setNum(n) { document.getElementById('number').value = n; checkNumber(); }
 
-  function setNum(n) {
-    document.getElementById('number').value = n;
-    checkNumber();
-  }
-
-  // ── 사이즈 ───────────────────────────────────────────
   function selectSize(val, el) {
     selectedSize = val;
     document.getElementById('uni-size').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -430,44 +466,34 @@
     document.getElementById('toggle-label').textContent = tableOpen ? '사이즈 가이드 닫기' : '사이즈 가이드 보기';
   }
 
-  // ── 제출 ─────────────────────────────────────────────
   async function submitForm() {
     const name = document.getElementById('name').value.trim();
     const type = document.getElementById('member-type').value;
     const num  = parseInt(document.getElementById('number').value);
     const eng  = document.getElementById('eng-name').value.trim();
-
     if (!name) { alert('성함을 입력해 주세요.'); return; }
     if (!type) { alert('회원 구분을 선택해 주세요.'); return; }
     if (!num || num < 1 || num > 99) { alert('등번호를 1~99 사이로 입력해 주세요.'); return; }
     if (!eng)  { alert('영문 이름을 입력해 주세요.'); return; }
     if (!selectedSize) { alert('유니폼 사이즈를 선택해 주세요.'); return; }
-
     await loadTaken();
     if (takenNumbers.includes(num)) {
       alert(num + '번은 이미 선택된 번호입니다. 다른 번호를 선택해 주세요.');
-      checkNumber();
-      return;
+      checkNumber(); return;
     }
-
     const url = SHEET_URL + '?action=submit'
       + '&name='    + encodeURIComponent(name)
       + '&type='    + encodeURIComponent(type)
       + '&number='  + num
       + '&engName=' + encodeURIComponent(eng)
       + '&size='    + encodeURIComponent(selectedSize);
-
-    try {
-      await fetch(url, { method: 'GET', mode: 'no-cors' });
-    } catch(e) {}
-
+    try { await fetch(url, { method: 'GET', mode: 'no-cors' }); } catch(e) {}
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('success-view').style.display = 'block';
     document.getElementById('success-msg').textContent =
       name + '님 / ' + type + ' / ' + num + '번 / 사이즈 ' + selectedSize;
   }
 
-  // ── 관리자 패널 ───────────────────────────────────────
   function openAdmin() {
     document.getElementById('admin-overlay').classList.add('open');
     document.getElementById('admin-lock').style.display = 'block';
@@ -476,11 +502,7 @@
     document.getElementById('pw-msg').textContent = '';
     setTimeout(() => document.getElementById('admin-pw').focus(), 100);
   }
-
-  function closeAdmin() {
-    document.getElementById('admin-overlay').classList.remove('open');
-  }
-
+  function closeAdmin() { document.getElementById('admin-overlay').classList.remove('open'); }
   document.getElementById('admin-overlay').addEventListener('click', function(e) {
     if (e.target === this) closeAdmin();
   });
@@ -489,10 +511,9 @@
     const pw = document.getElementById('admin-pw').value;
     const msg = document.getElementById('pw-msg');
     if (!pw) { msg.textContent = '비밀번호를 입력해 주세요.'; return; }
-
-    const callbackName = 'cb_verify_' + Date.now();
-    window[callbackName] = function(data) {
-      delete window[callbackName];
+    const cbName = 'cb_verify_' + Date.now();
+    window[cbName] = function(data) {
+      delete window[cbName];
       if (data.success) {
         document.getElementById('admin-lock').style.display = 'none';
         document.getElementById('admin-settings').style.display = 'block';
@@ -501,19 +522,15 @@
         msg.textContent = data.message || '비밀번호가 틀렸습니다.';
       }
     };
-
-    const script = document.createElement('script');
-    script.src = SHEET_URL
-      + '?action=saveSettings'
+    const s = document.createElement('script');
+    s.src = SHEET_URL + '?action=saveSettings'
       + '&pw=' + encodeURIComponent(pw)
       + '&memberOnlyStart=' + encodeURIComponent(currentSettings.memberOnlyStart || '')
       + '&memberOnlyEnd='   + encodeURIComponent(currentSettings.memberOnlyEnd   || '')
       + '&openToAllStart='  + encodeURIComponent(currentSettings.openToAllStart  || '')
-      + '&callback=' + callbackName;
-    script.onerror = function() {
-      document.getElementById('pw-msg').textContent = '서버 연결 오류';
-    };
-    document.body.appendChild(script);
+      + '&callback=' + cbName;
+    s.onerror = function() { msg.textContent = '서버 연결 오류'; };
+    document.body.appendChild(s);
   }
 
   function loadCurrentSettings(preloaded) {
@@ -527,46 +544,37 @@
   }
 
   function saveSettings() {
-    const pw    = document.getElementById('admin-pw').value;
-    const s1    = document.getElementById('s-member-start').value;
-    const s2    = document.getElementById('s-member-end').value;
-    const s3    = document.getElementById('s-open-start').value;
-    const msg   = document.getElementById('save-msg');
-
+    const pw = document.getElementById('admin-pw').value;
+    const s1 = document.getElementById('s-member-start').value;
+    const s2 = document.getElementById('s-member-end').value;
+    const s3 = document.getElementById('s-open-start').value;
+    const msg = document.getElementById('save-msg');
     if (!s1 || !s2 || !s3) { msg.className = 'admin-msg err'; msg.textContent = '날짜를 모두 입력해 주세요.'; return; }
     msg.className = 'admin-msg'; msg.textContent = '저장 중...';
-
-    const callbackName = 'cb_save_' + Date.now();
-    window[callbackName] = function(data) {
-      delete window[callbackName];
+    const cbName = 'cb_save_' + Date.now();
+    window[cbName] = function(data) {
+      delete window[cbName];
       if (data.success) {
-        msg.className = 'admin-msg ok';
-        msg.textContent = '✅ ' + data.message;
+        msg.className = 'admin-msg ok'; msg.textContent = '✅ ' + data.message;
         currentSettings = { memberOnlyStart: s1, memberOnlyEnd: s2, openToAllStart: s3 };
         applySettings(currentSettings);
         document.getElementById('current-settings').innerHTML =
           '현재: 정회원 <span>' + s1 + ' ~ ' + s2 + '</span> / 비정회원 오픈 <span>' + s3 + '</span>';
       } else {
-        msg.className = 'admin-msg err';
-        msg.textContent = '❌ ' + (data.message || '저장 실패');
+        msg.className = 'admin-msg err'; msg.textContent = '❌ ' + (data.message || '저장 실패');
       }
     };
-
-    const script = document.createElement('script');
-    script.src = SHEET_URL
-      + '?action=saveSettings'
-      + '&pw='             + encodeURIComponent(pw)
+    const s = document.createElement('script');
+    s.src = SHEET_URL + '?action=saveSettings'
+      + '&pw='              + encodeURIComponent(pw)
       + '&memberOnlyStart=' + encodeURIComponent(s1)
       + '&memberOnlyEnd='   + encodeURIComponent(s2)
       + '&openToAllStart='  + encodeURIComponent(s3)
-      + '&callback=' + callbackName;
-    script.onerror = function() {
-      msg.className = 'admin-msg err'; msg.textContent = '서버 연결 오류';
-    };
-    document.body.appendChild(script);
+      + '&callback=' + cbName;
+    s.onerror = function() { msg.className = 'admin-msg err'; msg.textContent = '서버 연결 오류'; };
+    document.body.appendChild(s);
   }
 
-  // ── 초기 로드 ─────────────────────────────────────────
   loadSettings();
   loadTaken();
 </script>
